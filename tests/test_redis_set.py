@@ -1,8 +1,4 @@
-import os
-
 import pytest
-from testcontainers.redis import RedisContainer
-
 import nosql_redis.main as main
 
 
