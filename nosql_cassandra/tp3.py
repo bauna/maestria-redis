@@ -1,3 +1,4 @@
+import logging
 import os
 from abc import ABC
 
@@ -13,10 +14,12 @@ class CassandraImporter(ImporterCSV, ABC):
   session: Session = None
 
   def connect(self):
-    contact_points = os.environ['CASSANDRA_HOSTS'].split(',')
+    cassandra_hosts = os.environ['CASSANDRA_HOSTS']
+    logging.info('Cassandra hosts: %s', cassandra_hosts)
+    contact_points = [(ip, int(port)) for ip, port in
+                      [address.split(':') for address in cassandra_hosts.split(',')]]
     local_dc = os.environ['CASSANDRA_DATACENTER']
-    self.cluster = Cluster(
-      contact_points=contact_points,
+    self.cluster = Cluster(contact_points,
       load_balancing_policy=DCAwareRoundRobinPolicy(local_dc))
     self.session = self.cluster.connect()
 

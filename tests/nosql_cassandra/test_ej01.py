@@ -9,6 +9,7 @@ class TestEJ01:
 
     # test_data = {10: 'Yohan BLAKE', 20: 'Tyquendo TRACEY', 30: 'Carina HORN'}
     test_data = {1: 'Christian COLEMAN', 2: 'Noah LYLES', 3: 'Divine ODUDURU'}
+    cassandra_session.execute('USE tp3_ej1')
     for key, name in test_data.items():
       db_name = cassandra_session.execute(f'SELECT nombre FROM deportistas WHERE id = {key};').one()
-      assert name == db_name
+      assert name == db_name.nombre

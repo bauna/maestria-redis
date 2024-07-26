@@ -13,12 +13,11 @@ class CassandraImporterEJ01(CassandraImporter):
 
   def initialize(self):
     cassandra_session = self.session
-    cassandra_session.execute(
-      f'''CREATE KEYSPACE IF NOT EXISTS tp3_ej1 
-        WITH replication = {
-          'class': 'SimpleStrategy', 
-          'replication_factor': 1
-        };''')
+      # CREATE KEYSPACE excelsior
+      # WITH replication = {'class': 'SimpleStrategy', 'replication_factor' : 3};
+    ks_query = "CREATE KEYSPACE IF NOT EXISTS tp3_ej1" \
+              " WITH replication = {'class': 'SimpleStrategy', 'replication_factor': 1};"
+    cassandra_session.execute(ks_query)
     cassandra_session.execute('USE tp3_ej1')
     cassandra_session.execute('DROP TABLE IF EXISTS deportistas;')
     cassandra_session.execute(
@@ -27,4 +26,4 @@ class CassandraImporterEJ01(CassandraImporter):
   def process_row(self, row):
     self.session.execute(
       f'''INSERT INTO deportistas (id, nombre) VALUES 
-          ({row['id_deportista']}, {row['nombre_deportista']});''')
+          ({row['id_deportista']}, '{row['nombre_deportista']}');''')
