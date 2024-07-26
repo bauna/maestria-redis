@@ -1,13 +1,10 @@
-import os
-
-from nosql_redis.tp1_ej01 import RedisImporterTP01
+from nosql_redis.tp2_ej01 import RedisImporterEJ01
 
 
-class TestTP01:
+class TestEJ01:
 
-  def test_get(self, redis_client):
-    importer = RedisImporterTP01()
-    base_path = os.getcwd()
+  def test_get(self, base_path, redis_client):
+    importer = RedisImporterEJ01()
     # importer.process_csv(f'{curr_path}/full_export.csv')
     importer.process_csv(f'{base_path}/tests/full_export_version_corta.csv')
 

@@ -1,4 +1,7 @@
 docker
 pytest
 pytest-asyncio
+cassandra-driver
 testcontainers-redis
+testcontainers[cassandra]
+testcontainers[mongodb]

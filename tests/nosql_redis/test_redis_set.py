@@ -1,5 +1,5 @@
 import pytest
-import nosql_redis.main as main
+import no_sql.main as main
 
 
 class TestRedis:
