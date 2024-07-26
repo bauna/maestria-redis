@@ -9,7 +9,7 @@ from cassandra.cluster import DCAwareRoundRobinPolicy
 
 @pytest.fixture(scope='session', autouse=True)
 def cassandra_container(request):
-  cassandra_container = CassandraContainer('cassandra:4.1.4')
+  cassandra_container = CassandraContainer()
   cassandra_container.start()
   request.addfinalizer(cassandra_container.stop)
   contact_points = cassandra_container.get_contact_points()
